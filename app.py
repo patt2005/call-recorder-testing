@@ -48,7 +48,7 @@ def token():
 
     token.add_grant(grant)
 
-    return {"token": token.to_jwt().decode()}
+    return {"token": token.to_jwt()}
 
 if __name__ == '__main__':
     app.run()
