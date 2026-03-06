@@ -1,10 +1,16 @@
 from flask import Flask, request
+from flask_cors import CORS
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VoiceGrant
 from twilio.twiml.voice_response import VoiceResponse, Dial
 import os
 
 app = Flask(__name__)
+
+# CORS: allow frontend origins (dev + production)
+# Set CORS_ORIGINS in Railway for production frontend URL, e.g. https://your-app.vercel.app
+origins = os.environ.get("CORS_ORIGINS", "http://localhost:5173").strip().split(",")
+CORS(app, origins=[o.strip() for o in origins], supports_credentials=True)
 
 ACCOUNT_SID = os.environ.get('TWIML_ACCOUNT_SID')
 API_KEY = os.environ.get('TWIML_API_KEY')
