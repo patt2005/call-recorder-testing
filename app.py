@@ -21,9 +21,12 @@ TWIML_APP_SID = os.environ.get('TWIML_APP_SID')
 def hello_world():  # put application's code here
     return 'Hello World!'
 
-@app.route("/voice", methods=["POST"])
+@app.route("/voice", methods=["POST", "GET"])
 def voice():
     to_number = request.values.get("To")
+
+    print(request.values)
+    print(request.data)
 
     response = VoiceResponse()
     dial = Dial(callerId="+19283161568")
